@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', '商品一覧')
+@section('title', '受電履歴一覧')
 
 @section('content_header')
-    <h1>商品一覧</h1>
+    <h1>受電履歴一覧</h1>
 @stop
 
 @section('content')
@@ -11,11 +11,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">商品一覧</h3>
+                    <h3 class="card-title">受電履歴一覧</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
-                                <a href="{{ url('items/add') }}" class="btn btn-default">商品登録</a>
+                                <a href="{{ url('items/add') }}" class="btn btn-default">受電登録</a>
                             </div>
                         </div>
                     </div>
@@ -24,21 +24,28 @@
                     <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>名前</th>
-                                <th>種別</th>
-                                <th>詳細</th>
+                                <th>物件ID</th>
+                                <th>受電指名先担当者</th>
+                                <th>対応者</th>
+                                <th>項目</th>
+                                <th>内容</th>
+                                <th>対応依頼</th>
+                                <th>更新日</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($items as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->type }}</td>
-                                    <td>{{ $item->detail }}</td>
-                                </tr>
-                            @endforeach
+                        @foreach ($callHistories as $callHistory)
+                            <tr>
+                                <td>{{ $callHistory->property_id }}</td>
+                                <td>{{ $callHistory->receiver_assigned_to }}</td>
+                                <td>{{ $callHistory->handler }}</td>
+                                <td>{{ $callHistory->item }}</td>
+                                <td>{{ $callHistory->content }}</td>
+                                <td>{{ $callHistory->request_method }}</td>
+                                <td>{{ $callHistory->updated_at }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

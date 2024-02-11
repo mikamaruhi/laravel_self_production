@@ -22,6 +22,10 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('items')->group(function () {
+// 受電履歴一覧を表示
+    Route::get('/', 'CallController@index')->name('call_histories.index');
+    Route::post('/call_register', [App\Http\Controllers\CallController::class, 'register']);
+
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index']);
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
