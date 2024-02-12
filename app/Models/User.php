@@ -42,4 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+// // ユーザーは複数の物件に対する担当者
+//     public function poroperties(){
+//         return $this->hasMany(property::class);
+//     }
+// // ユーザーは複数の受電に対する担当者
+//     public function callhistories(){
+//         return $this->hasMany(callhistory::class);
+//     }
+
 }

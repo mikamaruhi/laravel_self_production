@@ -14,14 +14,16 @@ return new class extends Migration
         Schema::create('call_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('property_id');
+            $table->string('property_name');
             $table->string('receiver_assigned_to');
             $table->string('handler');
             $table->string('item');
             $table->text('content');
             $table->string('request_method');
             $table->timestamps();
+
             // 物件IDを外部キーに設定
-            $table->foreign('property_id')->references('id')->on('properties');
+            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('call_histories');
     }
 };

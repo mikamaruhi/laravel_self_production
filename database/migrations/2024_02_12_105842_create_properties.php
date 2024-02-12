@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,17 +11,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('properties', function (Blueprint $table) {
-            $table->id('id');
+            $table->id(); // 主キー、自動インクリメント
+            $table->string('property_id')->unique(); // 一意の識別子
             $table->string('property_name');
             $table->unsignedBigInteger('responsible_id');
+            $table->foreign('responsible_id')->references('id')->on('users'); // 外部キー制約
             $table->string('responsible_name');
             $table->string('accounting_person_name');
             $table->date('transfer_date');
-            $table->timestamps();
-            //フロント担当＝物件担当を外部キーに設定/ 
-            $table->foreign('responsible_id')->references('id')->on('users');
+            $table->timestamps(); // 作成日時と更新日時
         });
-
     }
 
     /**
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('properties');
     }
 };
