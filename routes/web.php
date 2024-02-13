@@ -39,5 +39,5 @@ Route::prefix('items')->group(function () {
     // 物件の登録画面に遷移
         Route::get('/propertyregister', [App\Http\Controllers\ProController::class, 'propertyregister']);
     // 物件の登録
-        Route::post('/propertyregister', [App\Http\Controllers\ProController::class, 'propertyregister']);
+        Route::post('/propertyaddregister', [App\Http\Controllers\ProController::class, 'propertyaddregister']);
 });

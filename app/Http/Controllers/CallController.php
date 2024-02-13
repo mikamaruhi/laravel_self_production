@@ -47,4 +47,6 @@ class Callcontroller extends Controller
         // 登録後、適切なリダイレクト先へ
         return redirect('items/');
     }
+
+
 }

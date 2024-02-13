@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>受電履歴一覧へようこそ</h1>
+    <h1>受電管理システムへようこそ</h1>
 @stop
 
 @section('content')
