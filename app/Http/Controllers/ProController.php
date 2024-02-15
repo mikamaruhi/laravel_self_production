@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ProController extends Controller
 {
         // 物件一覧画面に遷移
         public function property()
         {
+            $properties = Property::all();
             return view('property.propertysheet', compact('properties'));
         }
 
@@ -20,7 +22,9 @@ class ProController extends Controller
         // 物件の登録画面に遷移
         public function propertyregister()
     {
-        return view('property.propertyregister');
+        $users = User::all();
+        return view('property.propertyregister', compact('users'));
+
     }
 
 
@@ -41,7 +45,7 @@ class ProController extends Controller
         Property::create($validatedData);
 
         // 登録後、適切なリダイレクト先へ
-        return redirect('items/property');
+        return redirect('items/propertysheet');
     }
 
 }

@@ -20,7 +20,7 @@
             @endif
 
             <div class="card card-primary">
-            <form action="{{ url('items/propertyregister') }}" method="POST">
+            <form action="{{ url('items/propertyaddregister') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="property_id">物件ID</label>
@@ -32,7 +32,12 @@
                 </div>
                 <div class="form-group">
                     <label for="responsible_id">フロント担当者名</label>
-                    <input type="text" class="form-control" id="responsible_id" name="responsible_id" placeholder="フロント担当者名" required>
+                    <select class="form-control" id="responsible_id" name="responsible_id" required>
+                        <option value="">選択してください</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="responsible_name">オペレーター担当</label>
@@ -50,7 +55,7 @@
                 <div class="card-footer">
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">登録</button>
-                        <a href='/items/property' class="btn btn-default">物件一覧へ戻る</a>
+                        <a href='/items/propertysheet' class="btn btn-default">物件一覧へ戻る</a>
                     </div>
                 </div>
             </form>

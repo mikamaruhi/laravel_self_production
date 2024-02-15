@@ -7,6 +7,10 @@
     <h1>物件一覧</h1>
 @stop
 
+@php
+use App\Models\User;
+@endphp
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -37,7 +41,7 @@
                             <tr>
                                 <td>{{ $property->property_id }}</td>
                                 <td>{{ $property->property_name }}</td>
-                                <td>{{ $property->responsible_id }}</td>
+                                <td>{{ User::find($property->responsible_id)->responsible_name }}</td>
                                 <td>{{ $property->responsible_name }}</td>
                                 <td>{{ $property->accounting_person_name }}</td>
                             </tr>

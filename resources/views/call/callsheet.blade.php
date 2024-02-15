@@ -47,6 +47,12 @@
                                 <td>{{ $callHistory->content }}</td>
                                 <td>{{ $callHistory->request_method }}</td>
                                 <td>{{ $callHistory->updated_at }}</td>
+                                <td>
+                                <!-- 編集ボタン -->
+                                    <!-- <a href="{{ url('items/callsheet/'.$callHistory->property_id.'/callsheet' )}}" class="button">>>詳細</a> -->
+                                    <a href="/items/callchange" class="button">>>詳細</a>
+                                </td>
+
                             </tr>
                         @endforeach
                         </tbody>

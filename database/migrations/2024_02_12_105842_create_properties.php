@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreign('responsible_id')->references('id')->on('users'); // 外部キー制約
             $table->string('responsible_name');
             $table->string('accounting_person_name');
-            $table->date('transfer_date');
             $table->timestamps(); // 作成日時と更新日時
         });
     }

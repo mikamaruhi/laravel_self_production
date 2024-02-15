@@ -16,11 +16,15 @@ class Callcontroller extends Controller
     }
 
     // 受電履歴の詳細画面に遷移
-    public function callsheet()
+    public function callchange(Request $request)
     {
-        return view('call.callchang');
-    }
-
+        $callHistory = array(); // $callHistory変数を定義し、空の配列として初期化
+    
+        // ここで$callHistoryにデータを追加する処理を記述する
+    
+        return view('call.callchange', ['callHistory' => $callHistory]);
+    }   
+    
     // 受電履歴の登録画面に遷移
     public function register()
     {
