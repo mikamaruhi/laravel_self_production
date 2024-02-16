@@ -35,6 +35,16 @@
                     <label for="receiver_assigned_to">受電指名先担当者</label>
                     <input type="text" class="form-control" id="receiver_assigned_to" name="receiver_assigned_to" placeholder="受電指名先担当者" required>
                 </div>
+                <!-- <div class="form-group">
+                    <label for="responsible_id">フロント担当者名</label>
+                    <select class="form-control" id="responsible_id" name="responsible_id" required>
+                        <option value="">選択してください</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div> -->
+
                 <div class="form-group">
                     <label for="handler">対応者</label>
                     <input type="text" class="form-control" id="handler" name="handler" placeholder="対応者" required>

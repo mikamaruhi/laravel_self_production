@@ -1,10 +1,10 @@
 <!-- 物件一覧 -->
 @extends('adminlte::page')
 
-@section('title', '物件一覧')
+@section('title', '社員一覧')
 
 @section('content_header')
-    <h1>物件一覧</h1>
+    <h1>社員一覧</h1>
 @stop
 
 @php
@@ -16,7 +16,7 @@ use App\Models\User;
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">物件一覧</h3>
+                    <h3 class="card-title">社員一覧</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
@@ -29,21 +29,19 @@ use App\Models\User;
                     <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
-                                <th>物件ID</th>
-                                <th>物件名</th>
-                                <th>フロント担当</th>
-                                <th>オペレーター担当</th>
-                                <th>振替日</th>
+                                <th>ID</th>
+                                <th>名前</th>
+                                <th>e-mail</th>
+                                <!-- <th>部署</th>
+                                <th>権限</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($properties as $property)
+                        @foreach ($users as $user)
                             <tr>
-                                <td>{{ $property->property_id }}</td>
-                                <td>{{ $property->property_name }}</td>
-                                <td>{{ User::find($property->responsible_id)->name }}</td>
-                                <td>{{ $property->responsible_name }}</td>
-                                <td>{{ $property->accounting_person_name }}</td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
                             </tr>
                         @endforeach
                         </tbody>

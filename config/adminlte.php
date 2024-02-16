@@ -303,9 +303,9 @@ return [
         ],
 
         [
-            // 'text' => '社員一覧',
-            // 'url'  => 'items/propertysheet',
-            // 'icon' => 'fas fa-gamepad',
+            'text' => '社員一覧',
+            'url'  => 'users',
+            'icon' => 'fas fa-gamepad',
         ],
 
 
