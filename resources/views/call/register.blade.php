@@ -25,13 +25,19 @@
                 @csrf
                 <div class="form-group">
                     <label for="property_id">物件ID</label>
-                    <input type="number" class="form-control" id="property_id" name="property_id" placeholder="物件ID" required>
+                    <select class="form-control" id="property_id" name="property_id" required>
+                        <option value="" disabled selected>選択してください</option>
+                        @foreach($properties as $id => $name)
+                            <option value="{{ $id }}">{{ $id }} - {{ $name }}</option>
+                        @endforeach
+                        {{-- <option value="other">その他</option> --}}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="property_name">物件名</label>
-                    <input type="text" class="form-control" id="property_name" name="property_name" required>
-                </div>
-                <div class="form-group">
+                    <input type="text" class="form-control" id="property_name" name="property_name" readonly>
+                </div> 
+                    <div class="form-group">
                     <label for="receiver_assigned_to">受電指名先担当者</label>
                     <input type="text" class="form-control" id="receiver_assigned_to" name="receiver_assigned_to" placeholder="受電指名先担当者" required>
                 </div>
@@ -73,6 +79,15 @@
                         <option value="折り返しTEL要">折り返しTEL要</option>
                         <option value="緊急TEL要">緊急TEL要</option>
                     </select>
+                    <div class="form-group">
+                        <label for="request_method">結果</label>
+                        <select class="form-control" id="result" name="result" required>
+                            <option value="" disabled selected>こちらからお選びください</option>
+                            <option value="完了">完了</option>
+                            <option value="継続中">継続中</option>
+                            <option value="未対応">未対応</option>
+                        </select>
+    
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-between">
@@ -90,4 +105,23 @@
 @stop
 
 @section('js')
+<script>
+    // 物件IDの選択が変更された時に、物件名を取得して表示する
+    document.getElementById('property_id').addEventListener('change', function() {
+        var propertyId = this.value;
+        var selectedOption = this.options[this.selectedIndex];
+        var propertyInfo = selectedOption.text.split(' - ');
+        if (propertyId === 'other') {
+            document.getElementById('property_name').value = '';
+            document.getElementById('property_name').readOnly = false;
+        } else if (propertyInfo.length > 1) {
+            var propertyName = propertyInfo[1];
+            document.getElementById('property_name').value = propertyName;
+            document.getElementById('property_name').readOnly = true;
+        } else {
+            document.getElementById('property_name').value = '紐づく物件名がありません';
+            document.getElementById('property_name').readOnly = true;
+        }
+    });
+</script>
 @stop

@@ -20,6 +20,8 @@ class Callcontroller extends Controller
                                     ->orWhere('content', 'like', "%$keyword%")
                                     ->orWhere('request_method', 'like', "%$keyword%")
                                     ->orWhere('updated_at', 'like', "%$keyword%")
+                                        // 追加：updated_atを降順に並べる
+                                        ->orderBy('updated_at', 'desc')
                                     ->get();
         return view('call.indexsearch', compact('callHistories'));
     }
@@ -27,7 +29,7 @@ class Callcontroller extends Controller
     // 受電履歴一覧画面を表示
     public function index()
     {
-        $callHistories = CallHistory::all();
+        $callHistories = CallHistory::orderBy('updated_at', 'desc')->get();
         return view('call.callsheet', compact('callHistories'));
     }
 
@@ -43,7 +45,8 @@ class Callcontroller extends Controller
     // 受電履歴の登録画面に遷移
     public function register()
     {
-        return view('call.register');
+        $properties = DB::table('properties')->pluck('property_name', 'property_id');
+        return view('call.register', compact('properties'));
     }
 
     // 受電履歴の登録
@@ -57,7 +60,8 @@ class Callcontroller extends Controller
             'handler' => 'required|string|max:255',
             'item' => 'required|string',
             'content' => 'required|string',
-            'request_method' => 'required|string'
+            'request_method' => 'required|string',
+            'result' => 'required|string'
         ]);
 
         // バリデーションが通ったデータで登録

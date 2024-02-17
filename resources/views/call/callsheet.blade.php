@@ -36,11 +36,12 @@
                             <tr>
                                 <th>物件ID</th>
                                 <th>物件名</th>
-                                <th>受電指名先担当者</th>
+                                <th>受電指名先</th>
                                 <th>対応者</th>
                                 <th>項目</th>
                                 <th>内容</th>
                                 <th>対応依頼</th>
+                                <th>結果</th>
                                 <th>更新日</th>
 
                             </tr>
@@ -53,8 +54,9 @@
                                 <td>{{ $callHistory->receiver_assigned_to }}</td>
                                 <td>{{ $callHistory->handler }}</td>
                                 <td>{{ $callHistory->item }}</td>
-                                <td>{{ $callHistory->content }}</td>
+                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">{{ $callHistory->content }}</td>
                                 <td>{{ $callHistory->request_method }}</td>
+                                <td>{{ $callHistory->result }}</td>
                                 <td>{{ $callHistory->updated_at }}</td>
                                 <td>
                                 <!-- 詳細ページへ -->

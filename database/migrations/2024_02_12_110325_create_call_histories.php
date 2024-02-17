@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('item');
             $table->text('content');
             $table->string('request_method');
+            $table->string('result');
             $table->timestamps();
 
             // 物件IDを外部キーに設定

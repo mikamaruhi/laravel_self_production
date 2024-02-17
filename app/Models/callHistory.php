@@ -18,7 +18,8 @@ class CallHistory extends Model
         'handler',                // 対応者
         'item',                   // 項目種別
         'content',                // 内容
-        'request_method'          // 対応依頼
+        'request_method',         // 対応依頼
+        'result',                 // 結果
     ];
 
     // リレーションシップ（もし必要なら）
