@@ -5,9 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\CallHistory;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB; // 追加
 
 class Callcontroller extends Controller
 {
+    // 受電履歴の検索結果一覧を表示
+    public function indexsearch(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $callHistories = CallHistory::where('property_name', 'like', "%$keyword%")
+                                    ->orWhere('receiver_assigned_to', 'like', "%$keyword%")
+                                    ->orWhere('handler', 'like', "%$keyword%")
+                                    ->orWhere('item', 'like', "%$keyword%")
+                                    ->orWhere('content', 'like', "%$keyword%")
+                                    ->orWhere('request_method', 'like', "%$keyword%")
+                                    ->orWhere('updated_at', 'like', "%$keyword%")
+                                    ->get();
+        return view('call.indexsearch', compact('callHistories'));
+    }
 
     // 受電履歴一覧画面を表示
     public function index()
@@ -17,11 +32,10 @@ class Callcontroller extends Controller
     }
 
     // 受電履歴の詳細画面に遷移
-    public function callchange(Request $request)
+    public function callchange(Request $request,$id)
     {
-        $callHistory = array(); // $callHistory変数を定義し、空の配列として初期化
     
-        // ここで$callHistoryにデータを追加する処理を記述する
+        $callHistory = DB::table('call_histories')->where('id', $id)->first();
     
         return view('call.callchange', ['callHistory' => $callHistory]);
     }   

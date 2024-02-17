@@ -1,10 +1,9 @@
-<!-- 受電詳細ページがはいる まだつくってない -->
 @extends('adminlte::page')
 
 @section('title', '受電詳細')
 
 @section('content_header')
-    <h1>受電詳細</h1>
+
 @stop
 
 @section('content')
@@ -23,67 +22,67 @@
             <table class="table" style="width: 500px;">
                 <tbody >
                     <tr>
-                        <th scope="col" class="table-primary">ID</th>
+                        <th scope="col" class="table-secondary">ID</th>
                     </tr>
                     <tr>
-                        <td class="text-center ">{{ $callHistory->property_id }}</td>
+                        <td class="text-center">{{ $callHistory->property_id }}</td>
                     </tr>
                     <tr>
-                        <th scope="col" class="table-primary">物件名</th>
+                        <th scope="col" class="table-secondary">物件名</th>
                     </tr>
                     <tr>
                         <td class="text-center">{{ $callHistory->property_name }}</td>
                     </tr>
                     <tr>
-                        <th scope="col" class="table-primary">フロント担当</th>
+                        <th scope="col" class="table-secondary">フロント担当</th>
                     </tr>
                     <tr>
-                        <td class="text-center">{{ receiver_assigned_to }}</td>
+                        <td class="text-center">{{ $callHistory->receiver_assigned_to }}</td>
                     </tr>
                     <tr>
-                        <th scope="col" class="table-primary">対応者</th>
+                        <th scope="col" class="table-secondary">対応者</th>
                     </tr>
                     <tr>
-                        <td class="text-center">{{ handler }}</td>
+                        <td class="text-center">{{ $callHistory->handler }}</td>
                     </tr>
                     <tr>
-                        <th scope="col" class="table-primary">項目</th>
+                        <th scope="col" class="table-secondary">項目</th>
                     </tr>
                     <tr>
-                        <td class="text-center">{{ item }}</td>
+                        <td class="text-center">{{ $callHistory->item }}</td>
                     </tr>
                     <tr>
-                        <th scope="col" class="table-primary">内容</th>
+                        <th scope="col" class="table-secondary">内容</th>
                     </tr>
                     <tr>
-                        <td class="text-center">{{ content }}</td>
+                        <td class="text-center">{{ $callHistory->content }}</td>
                     </tr>
                     <tr>
-                    <th scope="col" class="table-primary">対応依頼</th>
+                        <th scope="col" class="table-secondary">対応依頼</th>
                     </tr>
                     <tr>
-                        <td class="text-center ">{{ request_method }}</td>
+                        <td class="text-center">{{ $callHistory->request_method }}</td>
                     </tr>
                     <tr>
-                    <th scope="col" class="table-primary">更新日</th>
+                        <th scope="col" class="table-secondary">更新日</th>
                     </tr>
                     <tr>
-                        <td class="text-center ">{{ updated_at }}</td>
+                        <td class="text-center">{{ $callHistory->updated_at }}</td>
                     </tr>
-
-
                 </tbody>
             </table>
-        <button type="button" id="go-back" class="btn btn-primary">戻る</button>
+            <button type="button" id="go-back" class="btn btn-secondary">戻る</button>
         </div>    
     </div>    
-
-
-
 @stop
 
 @section('css')
 @stop
 
 @section('js')
+    <script>
+        document.getElementById('go-back').addEventListener('click', function() {
+            window.history.back();
+        });
+    </script>
 @stop

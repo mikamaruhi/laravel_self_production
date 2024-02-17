@@ -31,13 +31,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
   
     Route::prefix('items')->group(function () {   
+    // 受電履歴の検索結果一覧を表示
+        Route::post('/', [App\Http\Controllers\CallController::class, 'indexsearch']);
     // 受電履歴一覧を表示
         Route::get('/', [App\Http\Controllers\CallController::class, 'index']);
     // 受電履歴の詳細画面に遷移
-        Route::get('/callchange', [App\Http\Controllers\CallController::class, 'callchange']);
+        Route::get('/callchange/{id}', [App\Http\Controllers\CallController::class, 'callchange']);
     // 受電履歴の登録画面に遷移
         Route::get('/register', [App\Http\Controllers\CallController::class, 'register']);
-    // 受電履歴の登録
+    // 受電の登録
         Route::post('/callregister', [App\Http\Controllers\CallController::class, 'callregister']);
 
     // 物件一覧画面に遷移
