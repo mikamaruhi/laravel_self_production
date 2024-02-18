@@ -1,16 +1,14 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CallHistory extends Model
+class DeletedCallHistory extends Model
 {
-    use HasFactory;
+    // テーブル名を指定
+    protected $table = 'deleted_call_histories';
 
-    protected $table = 'call_histories';
-
-    // Mass Assignmentで使用するフィールド
     protected $fillable = [
         'property_id',            // 物件ID
         'property_name',          // 物件名
@@ -22,16 +20,4 @@ class CallHistory extends Model
         'result',                 // 結果
     ];
 
-    // 削除されたデータを保存するテーブルとの関連を設定する
-    public function deletedHistories()
-    {
-        return $this->hasMany(DeletedCallHistory::class, 'call_history_id');
-    }
-
-
-
 }
-
-
-
-

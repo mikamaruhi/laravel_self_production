@@ -9,40 +9,59 @@ use App\Models\User;
 class UserController extends Controller
 {
 
-        // ユーザー一覧ページを表示
-        public function index()
+    // 社員一覧ページを表示
+    public function index()
     {
-        $users = User::all(); 
-        // ユーザー一覧を取得する処理
+        // 10件ごとにページネーションをつける
+        $users = User::paginate(10);
+        // 社員一覧を取得する処理
         return view('profile.users', compact('users'));
     }
 
 
-        //ユーザー情報の登録編集
-        public function edit()
+    //社員情報の登録編集
+    public function edit($id)
     {
-        $user = Auth::user();
+        // 指定したIDのユーザーレコードを取得
+        $user = User::find($id);
+
+        // 編集画面に取得したユーザーレコードを渡す
         return view('profile.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    // 社員情報を編集処理
+    public function update(Request $request, $id)
     {
-        
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-        $user = Auth::user();
-        if (!$user) {
-            // ユーザーが存在しない場合の処理
-            // エラーメッセージを表示してリダイレクト
-            return redirect()->route('profile.edit')->with('error', 'ユーザーが存在しません');
-        }
-
-
-        $user = Auth::user();
+        $user = User::findOrFail($id);
+    
+        // フォームから送信されたデータでユーザーレコードを更新
         $user->name = $request->input('name');
-        // 他のユーザー情報も同様に更新する処理を追加します
+        $user->department = $request->input('department');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
         $user->save();
-        return redirect()->route('profile.edit')->with('success', 'ユーザー情報を更新しました');
+    
+        // 更新後のユーザーデータを再取得
+
+        return redirect('/users');
+
     }
+        
+        // if (!Auth::check()) {
+        //     return redirect()->route('login');
+        // }
+        // $user = Auth::user();
+        // if (!$user) {
+        //     // ユーザーが存在しない場合の処理
+        //     // エラーメッセージを表示してリダイレクト
+        //     return redirect()->route('profile.edit')->with('error', 'ユーザーが存在しません');
+        // }
+
+
+        // $user = Auth::user();
+        // $user->name = $request->input('name');
+        // // 他のユーザー情報も同様に更新する処理を追加します
+        // $user->save();
+        // return redirect()->route('profile.edit')->with('success', 'ユーザー情報を更新しました');
 }
+

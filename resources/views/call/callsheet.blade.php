@@ -20,7 +20,7 @@
                             <div class="input-group">
                                 <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力してください">
                                 <div class="input-group-append">
-                                    <button type="button" class="btn btn-secondary">検索</button>                                </div>
+                                    <button type="submit" class="btn btn-secondary">検索</button>                               </div>
                             </div>
                         </form>
                         <div class="input-group input-group-sm">
@@ -71,6 +71,8 @@
             </div>
         </div>
     </div>
+<!-- ページネーションの表示 -->
+{{ $callHistories->links('pagination::bootstrap-4') }}
 @stop
 
 @section('css')

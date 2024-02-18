@@ -18,6 +18,15 @@ use App\Models\User;
                 <div class="card-header">
                     <h3 class="card-title">物件一覧</h3>
                     <div class="card-tools">
+                        {{-- 検索バー --}}
+                        <form action="{{ url('/items/propertysheet') }}" method="POST" class="mb-3">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力してください">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-secondary">検索</button>                                </div>
+                            </div>
+                        </form>
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
                                 <a href="{{ url('items/propertyregister') }}" class="btn btn-default">物件登録</a>
@@ -44,6 +53,10 @@ use App\Models\User;
                                 <td>{{ User::find($property->responsible_id)->name }}</td>
                                 <td>{{ $property->responsible_name }}</td>
                                 <td>{{ $property->accounting_person_name }}</td>
+                                <td>
+                                <!-- 詳細ページへ -->
+                                <a href="{{ url('/items/detailproperty/'.$property->property_id)}}" class="button">>>詳細</a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -52,6 +65,10 @@ use App\Models\User;
             </div>
         </div>
     </div>
+<!-- ページネーションの表示 -->
+{{ $properties->links('pagination::bootstrap-4') }}
+
+
 @stop
 
 @section('css')

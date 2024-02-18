@@ -8,7 +8,8 @@
 @stop
 
 @php
-use App\Models\User;
+use App\Models\User;1
+
 @endphp
 
 @section('content')
@@ -20,7 +21,6 @@ use App\Models\User;
                     <div class="card-tools">
                         <div class="input-group input-group-sm">
                             <div class="input-group-append">
-                                <a href="{{ url('items/propertyregister') }}" class="btn btn-default">物件登録</a>
                             </div>
                         </div>
                     </div>
@@ -31,9 +31,9 @@ use App\Models\User;
                             <tr>
                                 <th>ID</th>
                                 <th>名前</th>
+                                <th>部署</th>
                                 <th>e-mail</th>
-                                <!-- <th>部署</th>
-                                <th>権限</th> -->
+                                <th>権限</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +41,32 @@ use App\Models\User;
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
+                                <td>
+                                    @if($user->department === 'department1')
+                                        フロント
+                                    @elseif($user->department === 'department2')
+                                        営業
+                                    @elseif($user->department === 'department3')
+                                        組合会計
+                                    @elseif($user->department === 'department4')
+                                        総務
+                                    @endif
+                                </td>
                                 <td>{{ $user->email }}</td>
+                                <td>
+                                    @if($user->role === 'user')
+                                        一般社員
+                                    @elseif($user->role === 'admin')
+                                        管理者
+                                    @endif
+                                </td>
+
+
+                                <td>
+                                    <!-- 詳細ページへ -->
+                                        <a href="{{ url('/edit/'.$user->id)}}" class="button">>>詳細</a>
+                                    </td>
+    
                             </tr>
                         @endforeach
                         </tbody>
@@ -50,9 +75,13 @@ use App\Models\User;
             </div>
         </div>
     </div>
+    <!-- ページネーションの表示 -->
+    {{ $users->links('pagination::bootstrap-4') }}
+
 @stop
 
 @section('css')
+
 @stop
 
 @section('js')

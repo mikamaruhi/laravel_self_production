@@ -21,7 +21,6 @@
         <div class="d-flex flex-column align-items-start">  
             <table class="table" style="width: 500px;">
                 <tbody >
-                    
                     <tr>
                         <th scope="col" class="table-secondary">ID</th>
                     </tr>
@@ -65,6 +64,12 @@
                         <td class="text-center">{{ $callHistory->request_method }}</td>
                     </tr>
                     <tr>
+                        <th scope="col" class="table-secondary">結果</th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ $callHistory->result }}</td>
+                    </tr>
+                    <tr>
                         <th scope="col" class="table-secondary">更新日</th>
                     </tr>
                     <tr>
@@ -73,6 +78,12 @@
                 </tbody>
             </table>
             <button type="button" id="go-back" class="btn btn-secondary">戻る</button>
+            <!-- 削除ボタン -->
+            <form action="{{ route('call.destroy', $callHistory->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">削除</button>
+            </form>
         </div>    
     </div>    
 @stop
