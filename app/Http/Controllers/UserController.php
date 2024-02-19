@@ -43,10 +43,25 @@ class UserController extends Controller
     
         // 更新後のユーザーデータを再取得
 
-        return redirect('/users');
-
+            return redirect('/users');
     }
-        
+
+        // 社員削除の処理
+    public function delete($id)
+    {
+        // 削除するユーザーを取得
+        $user = User::find($id);
+
+        // ユーザーが存在する場合は削除
+        if ($user) {
+            $user->delete();
+            // 削除後のリダイレクト先やメッセージを設定
+            return redirect()->back()->with('success', '削除が完了しました。');
+            } else {
+                // ユーザーが存在しない場合のリダイレクト先やメッセージを設定
+                return redirect()->back()->with('error', '指定されたユーザーは存在しません。');
+            } 
+    }
         // if (!Auth::check()) {
         //     return redirect()->route('login');
         // }

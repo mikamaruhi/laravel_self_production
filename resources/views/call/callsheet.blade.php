@@ -65,7 +65,7 @@
                                 <td>{{ $callHistory->updated_at }}</td>
                                 <td>
                                 <!-- 詳細ページへ -->
-                                    <a href="{{ url('/items/callchange/'.$callHistory->id)}}" class="button">>>詳細</a>
+                                    <a href="{{ url('/items/callchange/'.$callHistory->id)}}" class="button">>>詳細/更新</a>
                                 </td>
 
                             </tr>

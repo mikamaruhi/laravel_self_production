@@ -41,6 +41,19 @@ class Callcontroller extends Controller
 
     }   
 
+    // 詳細画面で一部編集機能を実装
+    public function update(Request $request, $id)
+    {
+        $callHistory = CallHistory::find($id);
+    
+        // フォームから送信されたデータでユーザーレコードを更新
+        $callHistory->result = $request->input('result');
+        $callHistory->save();
+    
+        // 更新後のユーザーデータを再取得
+
+            return redirect('/items');
+    }
 
     // 受電履歴の詳細画面で削除ボタンを押した場合の処理
     public function destroy($id)

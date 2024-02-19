@@ -67,14 +67,14 @@
                 </table>
                 <button type="submit">更新</button>
                 <button type="button" id="go-back" class="btn btn-secondary">戻る</button>
-                <!-- 削除ボタン -->
-                {{-- <form action="{{ route('profile.destroy', $user->id) }}" method="POST"> --}}
+                {{-- <form action="{{ route('users.destroy', ['id' => $user->id]) }}" method="POST">
                     @csrf
+                    @method('DELETE')
+                    <button type="submit">削除</button>
+                </form> --}}
             </div>    
         </div>   
     </form>
-    @method('DELETE')
-<button type="submit">削除</button>
 
 @stop
 

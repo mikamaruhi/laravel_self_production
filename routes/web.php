@@ -28,8 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
     // 社員編集
     Route::post('/edit/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     // 社員削除
-    Route::post('/profile/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('profile.destroy');
-
+    // Route::delete('/edit/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('users.destroy');
+   
 // TOPページに遷移
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
   
@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [App\Http\Controllers\CallController::class, 'index']);
     // 受電履歴の詳細画面に遷移
         Route::get('/callchange/{id}', [App\Http\Controllers\CallController::class, 'callchange']);
+    // 受電履歴の一部編集
+        Route::post('/callchange/{id}', [App\Http\Controllers\CallController::class, 'update'])->name('callupdate');
     // 詳細画面の削除ボタンを押したあとのルート
         Route::delete('/call/{id}', [App\Http\Controllers\CallController::class, 'destroy'])->name('call.destroy');  
     // 受電履歴の登録画面に遷移

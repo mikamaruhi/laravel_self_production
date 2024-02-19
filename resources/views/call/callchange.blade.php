@@ -63,12 +63,35 @@
                     <tr>
                         <td class="text-center">{{ $callHistory->request_method }}</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th scope="col" class="table-secondary">結果</th>
                     </tr>
                     <tr>
                         <td class="text-center">{{ $callHistory->result }}</td>
+                    </tr> --}}
+                    <tr>
+                        <th scope="col" class="table-secondary">結果</th>
                     </tr>
+                    <tr>
+                        <td class="text-center">
+                            <form action="{{ route('callupdate', $callHistory->id) }}" method="POST">
+                                @csrf
+                                <div class="form-group mb-0">
+                                    <select class="form-control" id="result" name="result" required>
+                                        <option value="" disabled selected>こちらからお選びください</option>
+                                        <option value="完了" @if($callHistory->result === '完了') selected @endif>完了</option>
+                                        <option value="継続中" @if($callHistory->result === '継続中') selected @endif>継続中</option>
+                                        <option value="未対応" @if($callHistory->result === '未対応') selected @endif>未対応</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2">更新</button>
+                            </form>
+                        </td>
+                    </tr>
+
+
+
+
                     <tr>
                         <th scope="col" class="table-secondary">更新日</th>
                     </tr>
