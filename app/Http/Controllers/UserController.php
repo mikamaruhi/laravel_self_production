@@ -31,7 +31,20 @@ class UserController extends Controller
 
     // 社員情報を編集処理
     public function update(Request $request, $id)
-    {
+    {   
+        // バリデーションを追加
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'department' => 'required',
+            'email' => 'required|email',
+            'role' => 'required',
+        ]);
+
+        // バリデーションエラーがある場合
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }        
+        // バリデーションエラーがない場合は更新処理を行う
         $user = User::findOrFail($id);
     
         // フォームから送信されたデータでユーザーレコードを更新
@@ -46,22 +59,24 @@ class UserController extends Controller
             return redirect('/users');
     }
 
-        // 社員削除の処理
-    public function delete($id)
-    {
-        // 削除するユーザーを取得
-        $user = User::find($id);
+    //     // 社員削除の処理
+    // public function delete($id)
+    // {
+    //     // 削除するユーザーを取得
+    //     $user = User::find($id);
 
-        // ユーザーが存在する場合は削除
-        if ($user) {
-            $user->delete();
-            // 削除後のリダイレクト先やメッセージを設定
-            return redirect()->back()->with('success', '削除が完了しました。');
-            } else {
-                // ユーザーが存在しない場合のリダイレクト先やメッセージを設定
-                return redirect()->back()->with('error', '指定されたユーザーは存在しません。');
-            } 
-    }
+    //     // ユーザーが存在する場合は削除
+    //     if ($user) {
+    //         $user->delete();
+    //         // 削除後のリダイレクト先やメッセージを設定
+    //         return redirect()->back()->with('success', '削除が完了しました。');
+    //         } else {
+    //             // ユーザーが存在しない場合のリダイレクト先やメッセージを設定
+    //             return redirect()->back()->with('error', '指定されたユーザーは存在しません。');
+    //         } 
+    // }
+
+
         // if (!Auth::check()) {
         //     return redirect()->route('login');
         // }

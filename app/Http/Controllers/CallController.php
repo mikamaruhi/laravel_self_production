@@ -77,7 +77,8 @@ class Callcontroller extends Controller
     // 受電履歴の登録画面に遷移
     public function register()
     {
-        $properties = DB::table('properties')->pluck('property_name', 'property_id');
+        // $properties = DB::table('properties')->pluck('property_name', 'property_id');
+        $properties = DB::table('properties')->orderBy('property_id', 'asc')->get();
         return view('call.register', compact('properties'));
     }
 

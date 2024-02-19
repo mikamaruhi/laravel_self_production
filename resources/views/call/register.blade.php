@@ -27,10 +27,9 @@
                     <label for="property_id">物件ID</label>
                     <select class="form-control" id="property_id" name="property_id" required>
                         <option value="" disabled selected>選択してください</option>
-                        @foreach($properties as $id => $name)
-                            <option value="{{ $id }}">{{ $id }} - {{ $name }}</option>
+                        @foreach($properties as $property)
+                            <option value="{{ $property->property_id }}">{{ $property->property_id }} - {{ $property->property_name }}</option>
                         @endforeach
-                        {{-- <option value="other">その他</option> --}}
                     </select>
                 </div>
                 <div class="form-group">

@@ -16,8 +16,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
-
+    'name' => '受電管理システム',
+    // 'name' => env('APP_NAME', 'Laravel'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

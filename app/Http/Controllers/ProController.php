@@ -12,7 +12,7 @@ class ProController extends Controller
         // 物件一覧画面に遷移
         public function property()
         {
-            $properties = Property::paginate(10);
+            $properties = Property::orderBy('property_id', 'asc')->paginate(10);
             return view('property.propertysheet', compact('properties'));
         }
 

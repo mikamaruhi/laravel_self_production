@@ -18,6 +18,16 @@
     </div>
     <form method="POST" action="">
         @csrf
+            <!-- エラーメッセージの表示 -->
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
         <div class="d-flex justify-content-center"> 
             <div class="d-flex flex-column align-items-start">  
                 <table class="table" style="width: 500px;">
