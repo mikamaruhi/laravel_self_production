@@ -14,16 +14,21 @@
                 <div class="card-header">
                     <h3 class="card-title">受電履歴一覧</h3>
                     <div class="card-tools">
-                        {{-- 検索バー --}}
-                        <form action="{{ url('/items') }}" method="POST" class="mb-3">
-                            @csrf
-                            <div class="input-group">
-                                <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力してください">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-secondary">検索</button>                               </div>
-                            </div>
-                        </form>
-                        <div class="input-group input-group-sm">
+                            {{-- 検索バー --}}
+                            <form action="{{ route('items.indexsearch') }}" method="POST" class="mb-3">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="result">結果検索</label>
+                                    <select class="form-control" id="result" name="result" required>
+                                        <option value="" disabled selected>こちらからお選びください</option>
+                                        <option value="完了">完了</option>
+                                        <option value="継続中">継続中</option>
+                                        <option value="未対応">未対応</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">検索</button>
+                            </form>
+                            <div class="input-group input-group-sm">
                             <div class="input-group-append">
                                 <a href="{{ url('items/register') }}" class="btn btn-default">受電登録</a>
                             </div>
@@ -60,7 +65,7 @@
                                 <td>{{ $callHistory->updated_at }}</td>
                                 <td>
                                 <!-- 詳細ページへ -->
-                                    <a href="{{ url('/items/callchange/'.$callHistory->property_id)}}" class="button">>>詳細</a>
+                                    <a href="{{ url('/items/callchange/'.$callHistory->id)}}" class="button">>>詳細</a>
                                 </td>
 
                             </tr>

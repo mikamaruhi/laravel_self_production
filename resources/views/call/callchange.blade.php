@@ -22,7 +22,7 @@
             <table class="table" style="width: 500px;">
                 <tbody >
                     <tr>
-                        <th scope="col" class="table-secondary">ID</th>
+                        <th scope="col" class="table-secondary">物件ID</th>
                     </tr>
                     <tr>
                         <td class="text-center">{{ $callHistory->property_id }}</td>
@@ -55,7 +55,7 @@
                         <th scope="col" class="table-secondary">内容</th>
                     </tr>
                     <tr>
-                        <td class="text-center">{{ $callHistory->content }}</td>
+                        <td class="text-left">{!! nl2br(e($callHistory->content)) !!}</td>
                     </tr>
                     <tr>
                         <th scope="col" class="table-secondary">対応依頼</th>

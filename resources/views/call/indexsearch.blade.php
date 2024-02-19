@@ -25,28 +25,29 @@
                                 <th>項目</th>
                                 <th>内容</th>
                                 <th>対応依頼</th>
+                                <th>結果</th>
                                 <th>更新日</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($callHistories as $callHistory)
+                            @foreach ($records as $record)
                             <tr>
-                                <td>{{ $callHistory->property_id }}</td>
-                                <td>{{ $callHistory->property_name }}</td>
-                                <td>{{ $callHistory->receiver_assigned_to }}</td>
-                                <td>{{ $callHistory->handler }}</td>
-                                <td>{{ $callHistory->item }}</td>
-                                <td>{{ $callHistory->content }}</td>
-                                <td>{{ $callHistory->request_method }}</td>
-                                <td>{{ $callHistory->updated_at }}</td>
+                                <td>{{ $record->property_id }}</td>
+                                <td>{{ $record->property_name }}</td>
+                                <td>{{ $record->receiver_assigned_to }}</td>
+                                <td>{{ $record->handler }}</td>
+                                <td>{{ $record->item }}</td>
+                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">{{ $record->content }}</td>
+                                <td>{{ $record->request_method }}</td>
+                                <td>{{ $record->result }}</td>
+                                <td>{{ $record->updated_at }}</td>
+                                 <!-- 詳細ページへ -->
                                 <td>
-                                <!-- 編集ボタン -->
-                                    <a href="{{ url('/items/callchange/'.$callHistory->property_id)}}" class="button">>>詳細</a>
+                                    <a href="{{ url('/items/callchange/'.$record->id)}}" class="button">>>詳細</a>
                                 </td>
-
                             </tr>
-                        @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

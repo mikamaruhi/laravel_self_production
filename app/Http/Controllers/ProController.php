@@ -16,6 +16,17 @@ class ProController extends Controller
             return view('property.propertysheet', compact('properties'));
         }
 
+        // 物件検索機能
+        public function search(Request $request)
+        {
+            $keyword = $request->input('keyword');
+            // キーワードを使って検索処理を行う
+            $results = Property::where('property_name', 'LIKE', "%{$keyword}%")->get();
+            
+            // 検索結果をビューに渡す
+            return view('property.propertysearch', compact('results'));
+        }
+
         
         // 物件詳細画面に遷移
         public function detailproperty(Request $request,$id)
@@ -26,13 +37,26 @@ class ProController extends Controller
             return view('property.propertychange', ['property' => $property]);
         }   
 
+        //詳細画面で削除登録
+        public function destroy($id)
+        {
+        
+        // $idを使用して該当の削除処理を実装する
+            $property = Property::find($id);
+    
+        // 削除処理を実行する
+            $property->delete();
+    
+            return redirect('items/propertysheet');
+        }   
+    
 
 
         // 物件の登録画面に遷移
         public function propertyregister()
     {
-        $users = User::all();
-        return view('property.propertyregister', compact('users'));
+            $users = User::all();
+            return view('property.propertyregister', compact('users'));
 
     }
 
@@ -43,8 +67,8 @@ class ProController extends Controller
     {
         // バリデーションを追加
         $validatedData = $request->validate([
-            'property_id' => 'required|integer',
-            'property_name' => 'required|string|max:255',
+            // 'property_id' => 'required|integer',
+            'property_id' => 'required|integer|unique:properties,property_id,' . $request->property_id,            'property_name' => 'required|string|max:255',
             'responsible_id' => 'required|string|max:100',
             'responsible_name' => 'required|string|max:100',
             'accounting_person_name' => 'required|string',
@@ -54,10 +78,10 @@ class ProController extends Controller
         //  $department1Users = User::where('department', 'department1')->get();
         
         // バリデーションが通ったデータで登録
-        Property::create($validatedData);
+            Property::create($validatedData);
 
         // 登録後、適切なリダイレクト先へ
-        return redirect('items/propertysheet');
+            return redirect('items/propertysheet');
         // ->with(['department1Users' => $department1Users]);
     }
 

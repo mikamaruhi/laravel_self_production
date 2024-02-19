@@ -13,22 +13,18 @@ class Callcontroller extends Controller
     // 受電履歴の検索結果一覧を表示
     public function indexsearch(Request $request)
     {
-        $keyword = $request->input('search');
-        $callHistories = CallHistory::where(function ($query) use ($keyword) {
-            $query->where('property_name', 'like', "%$keyword%")
-                ->orWhere('receiver_assigned_to', 'like', "%$keyword%")
-                ->orWhere('handler', 'like', "%$keyword%")
-                ->orWhere('item', 'like', "%$keyword%")
-                ->orWhere('content', 'like', "%$keyword%")
-                ->orWhere('request_method', 'like', "%$keyword%")
-                ->orWhere('updated_at', 'like', "%$keyword%");
-        })
-        ->orderBy('updated_at', 'desc')
-        ->get();
-    
-        return view('call.indexsearch', compact('callHistories'));
-    }
+    // 検索条件の値を取得
+        $searchValue = $request->input('result');
 
+    // 対応するレコードをデータベースから取得
+        $records = DB::table('call_histories')
+                    ->where('result', $searchValue)
+                    ->get();
+
+    // 取得した結果をビューに渡して表示
+        return view('call.indexsearch', ['records' => $records]);
+    }
+    
     // 受電履歴一覧画面を表示
     public function index()
     {
@@ -40,9 +36,9 @@ class Callcontroller extends Controller
     public function callchange(Request $request,$id)
     {
     
-        $callHistory = DB::table('call_histories')->where('property_id', $id)->first();
-    
+        $callHistory = DB::table('call_histories')->where('id', $id)->first();
         return view('call.callchange', ['callHistory' => $callHistory]);
+
     }   
 
 
@@ -51,17 +47,17 @@ class Callcontroller extends Controller
     {
     
     // $idを使用して該当の受電履歴を取得し、削除する処理を実装する
-    $callHistory = CallHistory::find($id);
+        $callHistory = CallHistory::find($id);
 
     // 削除されたデータを別のテーブルに保存する
-    $deletedCallHistory = new DeletedCallHistory();
-    $deletedCallHistory->call_history_id = $callHistory->id;
+        $deletedCallHistory = new DeletedCallHistory();
+        $deletedCallHistory->call_history_id = $callHistory->id;
     // 必要なデータを保存する
 
     // 削除処理を実行する
-    $callHistory->delete();
+        $callHistory->delete();
 
-    return redirect('items/');
+        return redirect('items/');
     }   
 
     
@@ -93,6 +89,6 @@ class Callcontroller extends Controller
         // 登録後、適切なリダイレクト先へ
         return redirect('items/');
     }
-
-
 }
+
+

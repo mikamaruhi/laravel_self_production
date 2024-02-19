@@ -1,10 +1,10 @@
-<!-- 物件一覧 -->
+<!-- 物件検索結果一覧 -->
 @extends('adminlte::page')
 
-@section('title', '物件一覧')
+@section('title', '物件検索結果一覧')
 
 @section('content_header')
-    <h1>物件一覧</h1>
+    <h1>物件検索結果一覧</h1>
 @stop
 
 @php
@@ -16,24 +16,7 @@ use App\Models\User;
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">物件一覧</h3>
-                    <div class="card-tools">
-                        {{-- 検索バー --}}
-                        <form action="{{ route('property.search') }}" method="POST" class="mb-3">
-                            @csrf
-                            <div class="input-group">
-                                <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力してください">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-secondary">検索</button>                                </div>
-                            </div>
-                        </form>
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-append">
-                                <a href="{{ url('items/propertyregister') }}" class="btn btn-default">物件登録</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <h3 class="card-title">※物件検索結果※</h3>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <thead>
@@ -46,7 +29,7 @@ use App\Models\User;
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($properties as $property)
+                        @foreach ($results as $property)
                             <tr>
                                 <td>{{ $property->property_id }}</td>
                                 <td>{{ $property->property_name }}</td>
@@ -65,10 +48,6 @@ use App\Models\User;
             </div>
         </div>
     </div>
-<!-- ページネーションの表示 -->
-{{ $properties->links('pagination::bootstrap-4') }}
-
-
 @stop
 
 @section('css')

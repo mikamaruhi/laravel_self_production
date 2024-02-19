@@ -59,7 +59,7 @@ use App\Models\User;
             </table>
             <button type="button" id="go-back" class="btn btn-secondary">戻る</button>
             <!-- 削除ボタン -->
-            {{-- <form action="{{ route('call.destroy', $callHistory->id) }}" method="POST"> --}}
+            <form action="{{ route('property.destroy', $property->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit">削除</button>

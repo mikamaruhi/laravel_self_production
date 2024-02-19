@@ -38,14 +38,6 @@
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
-                    {{-- <select class="form-control" id="responsible_id" name="responsible_id" required>
-                        <option value="">選択してください</option>
-                            @if(session('department1Users'))
-                                @foreach(session('department1Users') as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            @endif
-                    </select> --}}
                 </div>
                 <div class="form-group">
                     <label for="responsible_name">オペレーター担当</label>
