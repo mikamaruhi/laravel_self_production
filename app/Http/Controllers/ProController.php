@@ -13,10 +13,9 @@ class ProController extends Controller
         public function property()
         {
             $properties = Property::orderBy('property_id', 'asc')->paginate(10);
-            $isEmpty = $properties->isEmpty();
-        //登録がない場合の処理
-            return view('property.propertysheet', compact('properties', 'isEmpty'));
+            return view('property.propertysheet', compact('properties'));
         }
+
         // 物件検索機能
         public function search(Request $request)
         {

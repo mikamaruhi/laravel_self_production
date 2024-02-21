@@ -46,25 +46,19 @@ use App\Models\User;
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($properties->isEmpty())
+                        @foreach ($properties as $property)
                             <tr>
-                                <td colspan="5">現在登録がありません。
+                                <td>{{ $property->property_id }}</td>
+                                <td>{{ $property->property_name }}</td>
+                                <td>{{ User::find($property->responsible_id)->name }}</td>
+                                <td>{{ $property->responsible_name }}</td>
+                                <td>{{ $property->accounting_person_name }}</td>
+                                <td>
+                                <!-- 詳細ページへ -->
+                                <a href="{{ url('/items/detailproperty/'.$property->property_id)}}" class="button">>>詳細</a>
                                 </td>
                             </tr>
-                            @else
-                            @foreach ($properties as $property)
-                                <tr>
-                                    <td>{{ $property->property_id }}</td>
-                                    <td>{{ $property->property_name }}</td>
-                                    <td>{{ User::find($property->responsible_id)->name }}</td>
-                                    <td>{{ $property->responsible_name }}</td>
-                                    <td>{{ $property->accounting_person_name }}</td>
-                                    <td>
-                                    <!-- 詳細ページへ -->
-                                    <a href="{{ url('/items/detailproperty/'.$property->property_id)}}" class="button">>>詳細</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
