@@ -66,7 +66,7 @@ class ProController extends Controller
     public function propertyaddregister(Request $request)
     {
         // バリデーションを追加
-        $validatedData = $request->validate([
+        $validatedData = $request->validate([ 
             'property_id' => 'required|integer|min:0|unique:properties,property_id,' . $request->property_id,
             'property_name' => 'required|string|max:255',
             'responsible_id' => 'required|string|max:100',
