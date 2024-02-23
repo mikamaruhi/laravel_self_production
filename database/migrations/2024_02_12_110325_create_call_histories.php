@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             // 物件IDを外部キーに設定
-            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+            // $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
         });
     }
 
