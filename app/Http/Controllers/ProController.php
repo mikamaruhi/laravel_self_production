@@ -67,6 +67,7 @@ class ProController extends Controller
     {
         // バリデーションを追加
         $validatedData = $request->validate([ 
+            // 'property_id' => 'required|integer|min:0|exists:properties,property_id',
             'property_id' => 'required|integer|min:0|unique:properties,property_id,' . $request->property_id,
             'property_name' => 'required|string|max:255',
             'responsible_id' => 'required|string|max:100',
@@ -74,6 +75,11 @@ class ProController extends Controller
             'accounting_person_name' => 'required|string',
         ]);
 
+        try {
+            Property::create($validatedData);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['property_id' => 'すでに使用されているproperty_idです。別の値を入力してください。']);
+        }
         //  // フロント担当者のみを取得するクエリを追加
         //  $department1Users = User::where('department', 'department1')->get();
         

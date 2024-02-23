@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     // 物件の登録
         Route::post('/propertyaddregister', [App\Http\Controllers\ProController::class, 'propertyaddregister']);
     // 受電履歴の検索結果一覧を表示
-    Route::post('/propertysheet/search', [App\Http\Controllers\ProController::class, 'search'])->name('property.search');
+        Route::post('/propertysheet/search', [App\Http\Controllers\ProController::class, 'search'])->name('property.search');
 
     });
 });

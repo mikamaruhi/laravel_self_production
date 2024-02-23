@@ -12,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id(); // 主キー、自動インクリメント
-            $table->string('property_id')->unique(); // 一意の識別子
+            $table->integer('property_id')->unique(); // 一意の識別子
             $table->string('property_name');
             $table->unsignedBigInteger('responsible_id');
             $table->foreign('responsible_id')->references('id')->on('users'); // 外部キー制約
