@@ -89,8 +89,8 @@ class Callcontroller extends Controller
         $validatedData = $request->validate([
             'property_id' => 'required|integer',
             'property_name' => 'required|string|max:255',
-            'receiver_assigned_to' => 'required|string|max:255',
-            'handler' => 'required|string|max:255',
+            'receiver_assigned_to' => 'required|string|max:100',
+            'handler' => 'required|string|max:100',
             'item' => 'required|string',
             'content' => 'required|string',
             'request_method' => 'required|string',

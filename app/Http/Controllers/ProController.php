@@ -68,7 +68,9 @@ class ProController extends Controller
         // バリデーションを追加
         $validatedData = $request->validate([
             // 'property_id' => 'required|integer',
-            'property_id' => 'required|integer|unique:properties,property_id,' . $request->property_id,            'property_name' => 'required|string|max:255',
+            'property_id' => 'required|integer|min:0|unique:properties,property_id,' . $request->property_id,
+            // 'property_id' => 'required|min:0|integer|unique:properties,property_id,' . $request->property_id, 
+            'property_name' => 'required|string|max:255',
             'responsible_id' => 'required|string|max:100',
             'responsible_name' => 'required|string|max:100',
             'accounting_person_name' => 'required|string',
