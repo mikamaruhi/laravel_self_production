@@ -65,8 +65,8 @@ use App\Models\User;1
                                 <td>
                                     <!-- 詳細ページへ -->
                                         <a href="{{ url('/edit/'.$user->id)}}" class="button">>>編集</a>
-                                    </td>
-    
+                                </td>
+  
                             </tr>
                         @endforeach
                         </tbody>
