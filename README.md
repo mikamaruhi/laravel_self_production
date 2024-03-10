@@ -27,7 +27,7 @@ MySQL 10.4.28
 Laravel 10.13.5
 ~~~
 ## 設計書
-[設計書ページへ](https://drive.google.com/drive/folders/1zGFS54r34G4i-GLRGIF77qGPaoIURGFo?lfhs=2)
+
 
 ## システム閲覧
 [アプリケーションページへ](https://laravelself-50b6b1a42c70.herokuapp.com/login)
